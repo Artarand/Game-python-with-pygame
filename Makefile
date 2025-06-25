@@ -14,8 +14,6 @@ help:
 
 install:	
 	uv venv --python 3.12
-	uv cache dir
-	uv pip list
 	# https://docs.astral.sh/uv/concepts/cache/#dependency-caching
 	uv sync --refresh
 	uv pip install -r pyproject.toml
@@ -24,15 +22,14 @@ sync:
 	uv sync
 
 lint:
-	uv venv
 	uvx ruff check --fix .
 	uvx ruff format
 	uvx ruff check --extend-select=I --fix
 
 run:
-	uv run src/main.py
+	uv run shifumi
 
-all: install lint run
+all: install sync lint run
 
 clean:
 	uv cache clean
